@@ -1,28 +1,37 @@
 package br.eng.eaa.screenmatch.controller;
 
 import br.eng.eaa.screenmatch.dto.SerieDTO;
-import br.eng.eaa.screenmatch.repository.SerieRepository;
+import br.eng.eaa.screenmatch.service.SerieService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
+@RequestMapping("/series")
 public class SerieController {
 
     @Autowired
-    private SerieRepository serieRepository;
+    private SerieService serieService;
 
-    @GetMapping("/series")
+    @GetMapping
     public List<SerieDTO> obterSeries() {
-        return serieRepository.findAll()
-                .stream()
-                .map(s -> new SerieDTO(s.getId(),s.getTitulo(),s.getTotalTemporadas(), s.getAvaliacao(),
-                        s.getGenero(), s.getAtores(), s.getPoster(), s.getSinopse()))
-                .collect(Collectors.toList());
+        return serieService.obterSeries();
+    }
+
+    @GetMapping("/top5")
+    public List<SerieDTO> obterTop5Series() {
+        return serieService.obterTop5Series();
+    }
+
+    @GetMapping("/lancamentos")
+    public List<SerieDTO> obterLancamentos() {
+        return serieService.obterLancamentos();
+    }
+
+    @GetMapping("/{id}")
+    public SerieDTO obterSeriePorId(@PathVariable Long id) {
+        return serieService.obterSeriePorId(id);
     }
 
 }

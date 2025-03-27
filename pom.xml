@@ -8,7 +8,7 @@
 		<version>3.1.1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>br.com.alura</groupId>
+	<groupId>br.eng.eaa</groupId>
 	<artifactId>screenmatch</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>screenmatch</name>
